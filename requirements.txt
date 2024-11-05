@@ -7,7 +7,5 @@ python -m virtualenv kivy-env
 # Activate the virtual environment
 # On Windows:
 kivy-env\Scripts\activate
-# On macOS/Linux:
-source kivy-env/bin/activate
 
 pip install kivy
