@@ -9,3 +9,5 @@ python -m virtualenv kivy-env
 kivy-env\Scripts\activate
 
 pip install kivy
+
+pip install pytest
