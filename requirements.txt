@@ -8,6 +8,8 @@ python -m virtualenv kivy-env
 # On Windows:
 kivy-env\Scripts\activate
 
-pip install kivy
+pip install kivymd
 
+#for tests
 pip install pytest
+

@@ -1,79 +1,94 @@
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
-from kivy.uix.label import Label
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
 
-class ASLApp(App):
+class ASLApp(MDApp):
     def build(self):
-        # Create the main layout
-        main_layout = BoxLayout(orientation='horizontal', padding=10, spacing=10)
+        layout = MDBoxLayout(orientation='horizontal', padding=20, spacing=20)
 
-        # ASL Input Box Layout
-        asl_input_layout = BoxLayout(orientation='vertical', padding=20)
-        asl_input_label = Label(text="ASL Input", size_hint=(1, 0.1), font_size=24)
+        # ASL Input Card
+        asl_input_card = MDCard(orientation='vertical', padding=20, spacing=10, radius=[20, 20, 20, 20],
+                                md_bg_color=(0.15, 0.15, 0.15, 1), size_hint=(0.5, 1))
         
-        # ASL Input TextInput (drag and drop area)
-        input_area = TextInput(text="Drag & Drop or Upload Image/Video",
-                               readonly=True,
-                               halign='center',
-                               size_hint=(1, 0.7),
-                               background_color=(0.2, 0.2, 0.2, 1),
-                               foreground_color=(1, 1, 1, 1),
-                               multiline=False)
-        # Bind the size change to adjust vertical padding
-        input_area.bind(size=self.update_padding)
-
-        # ASL Input buttons
-        input_buttons_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.2), spacing=10)
-        media_button = Button(text="Media", size_hint=(0.5, 1), background_color=(0.2, 0.2, 1, 1))
-        live_button = Button(text="Live", size_hint=(0.5, 1), background_color=(0.2, 0.2, 1, 1))
-        input_buttons_layout.add_widget(media_button)
-        input_buttons_layout.add_widget(live_button)
-
-        # Add components to the input layout
-        asl_input_layout.add_widget(asl_input_label)
-        asl_input_layout.add_widget(input_area)
-        asl_input_layout.add_widget(input_buttons_layout)
-
-        # ASL Output Box Layout
-        asl_output_layout = BoxLayout(orientation='vertical', padding=20)
-        asl_output_label = Label(text="ASL Output", size_hint=(1, 0.1), font_size=24)
+        asl_input_label = MDLabel(
+            text="ASL Input", 
+            halign='center', 
+            font_style='H5', 
+            bold=True, 
+            size_hint_y=0.1,
+            theme_text_color="Custom", 
+            text_color=(1, 1, 1, 1)  # Set text color to white
+        )
         
-        # ASL Output TextInput (output area)
-        output_area = TextInput(text="Recognition/Translation Output",
-                                readonly=True,
-                                halign='center',
-                                size_hint=(1, 0.7),
-                                background_color=(0.2, 0.2, 0.2, 1),
-                                foreground_color=(1, 1, 1, 1),
-                                multiline=False)
-        output_area.bind(size=self.update_padding)  # Bind size to adjust padding
+        # ASL Input Area using MDLabel
+        asl_input_area = MDLabel(
+            text="Drag & Drop or Upload Image/Video", 
+            halign="center",  # Center the text
+            size_hint=(1, 0.7),
+            font_size=20,  # Increase font size
+            theme_text_color="Custom",
+            text_color=(1, 1, 1, 1)  # Set text color to black
+        )
+        
+        # Buttons layout
+        asl_input_buttons = MDBoxLayout(orientation='horizontal', spacing=20, padding=[0, 20, 0, 0], size_hint=(1, 0.1))
+        
+        media_button = MDRaisedButton(text="Media", md_bg_color=(0.2, 0.2, 1, 1), size_hint=(0.5, 1))
+        live_button = MDRaisedButton(text="Live", md_bg_color=(0.2, 0.2, 1, 1), size_hint=(0.5, 1))
+        
+        asl_input_buttons.add_widget(media_button)
+        asl_input_buttons.add_widget(live_button)
 
-        # ASL Output buttons
-        output_buttons_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.2), spacing=10)
-        recognition_button = Button(text="Recognition", size_hint=(0.33, 1), background_color=(0.2, 0.2, 1, 1))
-        translation_button = Button(text="Translation", size_hint=(0.33, 1), background_color=(0.2, 0.2, 1, 1))
-        text_asl_button = Button(text="Text to ASL", size_hint=(0.33, 1), background_color=(0.2, 0.2, 1, 1))
-        output_buttons_layout.add_widget(recognition_button)
-        output_buttons_layout.add_widget(translation_button)
-        output_buttons_layout.add_widget(text_asl_button)
+        # Add elements to ASL Input Card
+        asl_input_card.add_widget(asl_input_label)
+        asl_input_card.add_widget(asl_input_area)
+        asl_input_card.add_widget(asl_input_buttons)
 
-        # Add components to the output layout
-        asl_output_layout.add_widget(asl_output_label)
-        asl_output_layout.add_widget(output_area)
-        asl_output_layout.add_widget(output_buttons_layout)
+        # ASL Output Card
+        asl_output_card = MDCard(orientation='vertical', padding=20, spacing=10, radius=[20, 20, 20, 20],
+                                 md_bg_color=(0.15, 0.15, 0.15, 1), size_hint=(0.5, 1))
+        
+        asl_output_label = MDLabel(
+            text="ASL Output", 
+            halign='center', 
+            font_style='H5', 
+            bold=True, 
+            size_hint_y=0.1,
+            theme_text_color="Custom", 
+            text_color=(1, 1, 1, 1)  # Set text color to white
+        )
+        
+        # ASL Output Area using MDLabel
+        asl_output_area = MDLabel(
+            text="Recognition/Translation Output", 
+            halign="center",  # Center the text
+            size_hint=(1, 0.7),
+            font_size=20,  # Increase font size
+            theme_text_color="Custom",
+            text_color=(1, 1, 1, 1)  # Set text color to black
+        )
+        
+        asl_output_buttons = MDBoxLayout(orientation='horizontal', spacing=20, padding=[0, 20, 0, 0], size_hint=(1, 0.1))
+        
+        recognition_button = MDRaisedButton(text="Recognition", md_bg_color=(0.2, 0.2, 1, 1), size_hint=(0.33, 1))
+        translation_button = MDRaisedButton(text="Translation", md_bg_color=(0.2, 0.2, 1, 1), size_hint=(0.33, 1))
+        text_asl_button = MDRaisedButton(text="Text to ASL", md_bg_color=(0.2, 0.2, 1, 1), size_hint=(0.33, 1))
+        
+        asl_output_buttons.add_widget(recognition_button)
+        asl_output_buttons.add_widget(translation_button)
+        asl_output_buttons.add_widget(text_asl_button)
 
-        # Add input and output layouts to the main layout
-        main_layout.add_widget(asl_input_layout)
-        main_layout.add_widget(asl_output_layout)
+        # Add elements to ASL Output Card
+        asl_output_card.add_widget(asl_output_label)
+        asl_output_card.add_widget(asl_output_area)
+        asl_output_card.add_widget(asl_output_buttons)
 
-        return main_layout
+        # Add both cards to the main layout
+        layout.add_widget(asl_input_card)
+        layout.add_widget(asl_output_card)
 
-    # Update padding function for vertical centering
-    def update_padding(self, instance, value):
-        # Set padding_y based on the widget's height and text line height
-        instance.padding_y = (instance.height - instance.line_height) / 2
+        return layout
 
-if __name__ == '__main__':
-    ASLApp().run()
+ASLApp().run()
